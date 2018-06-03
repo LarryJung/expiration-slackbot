@@ -46,6 +46,7 @@ public class SlackMessageDto {
     @Getter
     @NoArgsConstructor
     public static class MessageButtonAttachment {
+        private String title;
         private String text;
         private String fallback;
         private String callback_id;
@@ -54,7 +55,8 @@ public class SlackMessageDto {
         private List<Action> actions;
 
         @Builder
-        public MessageButtonAttachment(String text, String fallback, String callback_id, String color, String attachment_type, List<Action> actions) {
+        public MessageButtonAttachment(String title, String text, String fallback, String callback_id, String color, String attachment_type, List<Action> actions) {
+            this.title = title;
             this.text = text;
             this.fallback = fallback;
             this.callback_id = callback_id;

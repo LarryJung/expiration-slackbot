@@ -30,7 +30,7 @@ public class Food extends BaseTimeEntity{
         return (int)now.until(expirationDate, ChronoUnit.DAYS);
     }
 
-    // 스케쥴러 실행 시 자동으로 상태를 바꿧으면 하는데..
+    // 스케쥴러 실행 시 자동으로 상태를 바꿧으면 하는데.. 근데 만약 상태를 바꿔서 Db를 계속 업데이트 하면 I/O 부하가 걸릴 수 있다. 이 정도로는 택도없지만
     public FoodStatus isStatus(LocalDateTime now) {
         int remains = remainDays(now);
         if (remains < 0) return FoodStatus.EXPIRED;

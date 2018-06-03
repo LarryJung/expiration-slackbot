@@ -1,6 +1,7 @@
 package com.larry.expirationslackbot;
 
 import com.larry.expirationslackbot.domain.FoodStatus;
+import com.larry.expirationslackbot.domain.HtmlFormDataBuilder;
 import com.larry.expirationslackbot.repository.FoodRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,15 +14,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 
+import static com.larry.expirationslackbot.domain.MySchedule.BOT_URL;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -36,10 +35,10 @@ public class BotAcceptanceTest {
     private FoodRepository foodRepository;
 
     @Autowired
-    private TestRestTemplate template;
+    private TestRestTemplate restTemplate;
 
     public TestRestTemplate template() {
-        return template;
+        return restTemplate;
     }
 
     @Test
@@ -49,10 +48,11 @@ public class BotAcceptanceTest {
         assertThat(foodRepository.findById(3L).get().isStatus(LocalDateTime.now()), is(FoodStatus.EXPIRED));
     }
 
-    private String toStringDateTime2(LocalDateTime localDateTime){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return Optional.ofNullable(localDateTime)
-                .map(formatter::format)
-                .orElse("");
+    @Test
+    public void sendTestManually() {
+        request = HtmlFormDataBuilder.urlEncodedForm()
+                .addParameter("text", "this is spring test").build();
+        log.debug("request : {}", request);
+        template().postForEntity(BOT_URL, request, String.class);
     }
 }

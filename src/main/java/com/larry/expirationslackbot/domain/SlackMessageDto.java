@@ -72,14 +72,16 @@ public class SlackMessageDto {
         private String type;
         private String value;
         private Confirm confirm;
+        private String url;
 
         @Builder
-        public Action(String name, String text, String type, String value, Confirm confirm) {
+        public Action(String name, String text, String type, String value, Confirm confirm, String url) {
             this.name = name;
             this.text = text;
             this.type = type;
             this.value = value;
             this.confirm = confirm;
+            this.url = url;
         }
     }
 

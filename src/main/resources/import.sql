@@ -3,3 +3,5 @@ INSERT INTO food (id, name, expiration_date) values (2, '삼겹살', '2018-06-05
 INSERT INTO food (id, name, expiration_date) values (3, '김치', '2018-05-20');
 INSERT INTO food (id, name, expiration_date) values (4, '요구르트', '2018-06-09');
 INSERT INTO food (id, name, expiration_date) values (5, '오뎅', '2018-06-10');
+INSERT INTO food (id, name, expiration_date) values (6, '용가리치킨', '2018-06-10');
+INSERT INTO food (id, name, expiration_date) values (7, '비비고 김치만두', '2018-06-10');

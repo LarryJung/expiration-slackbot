@@ -21,15 +21,9 @@ public class SlackSenderManager {
     @Autowired
     private FoodRepository foodRepository;
 
+    private final RestTemplate restTemplate = new RestTemplate();
 
-    private final RestTemplate restTemplate;
-    private final ObjectMapper objectMapper;
-
-    @Autowired
-    public SlackSenderManager(RestTemplate restTemplate, ObjectMapper objectMapper) {
-        this.restTemplate = restTemplate;
-        this.objectMapper = objectMapper;
-    }
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public boolean send(SlackTargetEnum target, Object object) {
         try {
@@ -66,5 +60,9 @@ public class SlackSenderManager {
                 .attachments(attachments).build();
     }
 
-
+    public void sendDeleteConfirmMessage(Long id) {
+        log.debug(foodRepository.findById(id).get().getName() + "을 삭제했습니다.");
+        SlackMessageDto.Basic dto = SlackMessageDto.Basic.builder().text(foodRepository.findById(id).get().getName() + "을(를) 목록에서 삭제했습니다.").build();
+        send(SlackTargetEnum.CH_BOT, dto);
+    }
 }

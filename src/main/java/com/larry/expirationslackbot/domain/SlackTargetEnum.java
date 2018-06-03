@@ -10,7 +10,6 @@ public enum SlackTargetEnum {
     private final String webHookUrl;
     private final String channel;
 
-
     SlackTargetEnum(String webHookUrl, String channel) {
         this.webHookUrl = webHookUrl;
         this.channel = channel;

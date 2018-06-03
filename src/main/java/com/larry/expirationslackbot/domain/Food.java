@@ -53,7 +53,7 @@ public class Food extends BaseTimeEntity {
         actions.add(SlackMessageDto.Action.builder()
                 .type("button")
                 .text("이미 먹었음")
-                .url(String.format("localhost:8080/remove/%d", id)).build());
+                .url(String.format("http://localhost:9090/foods/remove/%d", id)).build());
         return SlackMessageDto.MessageButtonAttachment.builder().title(name).text(toRemainMessage()).actions(actions).build();
     }
 

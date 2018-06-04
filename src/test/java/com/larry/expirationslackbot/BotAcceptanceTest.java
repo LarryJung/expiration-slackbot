@@ -1,7 +1,6 @@
 package com.larry.expirationslackbot;
 
 import com.larry.expirationslackbot.domain.FoodStatus;
-import com.larry.expirationslackbot.domain.HtmlFormDataBuilder;
 import com.larry.expirationslackbot.repository.FoodRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +13,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 
-import static com.larry.expirationslackbot.domain.MySchedule.BOT_URL;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -48,11 +45,11 @@ public class BotAcceptanceTest {
         assertThat(foodRepository.findById(3L).get().isStatus(LocalDateTime.now()), is(FoodStatus.EXPIRED));
     }
 
-    @Test
-    public void sendTestManually() {
-        request = HtmlFormDataBuilder.urlEncodedForm()
-                .addParameter("text", "this is spring test").build();
-        log.debug("request : {}", request);
-        template().postForEntity(BOT_URL, request, String.class);
-    }
+//    @Test
+//    public void sendTestManually() {
+//        request = HtmlFormDataBuilder.urlEncodedForm()
+//                .addParameter("text", "this is spring test").build();
+//        log.debug("request : {}", request);
+//        template().postForEntity(BOT_URL, request, String.class);
+//    }
 }

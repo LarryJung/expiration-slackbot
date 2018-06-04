@@ -1,6 +1,5 @@
 package com.larry.expirationslackbot.domain;
 
-import com.larry.expirationslackbot.repository.FoodRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
